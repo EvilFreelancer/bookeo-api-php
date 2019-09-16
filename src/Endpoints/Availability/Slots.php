@@ -19,13 +19,35 @@ class Slots extends Availability
      *
      * @return $this
      */
-    public function __invoke(string $productId, string $startTime, string $endTime, string $pageNavigationToken, int $itemsPerPage = 50, int $pageNumber = 1)
+    public function __invoke(string $productId = null, string $startTime = null, string $endTime = null, int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1)
     {
-        $query = http_build_query(['pageNumber' => $pageNumber]);
+        if (null !== $productId) {
+            $this->appendToQuery('productId', $productId);
+        }
+
+        if (null !== $startTime && null === $pageNavigationToken) {
+            $this->appendToQuery('startTime', $startTime);
+        } elseif (null === $startTime && null !== $pageNavigationToken) {
+            $this->appendToQuery('pageNavigationToken', $pageNavigationToken);
+        } else {
+            throw new \InvalidArgumentException('At least "startTime" or "pageNavigationToken" must be set');
+        }
+
+        if (null !== $startTime) {
+            $this->appendToQuery('endTime', $endTime);
+        }
+
+        if (null !== $startTime) {
+            $this->appendToQuery('itemsPerPage', $itemsPerPage);
+        }
+
+        if (null !== $pageNavigationToken) {
+            $this->appendToQuery('pageNumber', $pageNumber);
+        }
 
         // Set HTTP params
         $this->type     = 'get';
-        $this->endpoint = $this->config->get('base_uri') . '/availability/slots';
+        $this->endpoint = '/availability/slots' . '?' . $this->getQuery();
         $this->response = SlotList::class;
 
         return $this;

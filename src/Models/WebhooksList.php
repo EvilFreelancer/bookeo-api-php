@@ -2,13 +2,15 @@
 
 namespace Bookeo\Models;
 
+use Bookeo\Model;
+
 /**
- * Class ProductList
+ * Class WebhooksList
  *
  * @codeCoverageIgnore
  * @package Bookeo\Models
  */
-class ProductList
+class WebhooksList extends Model
 {
     /**
      * List of allowed fields
@@ -19,7 +21,7 @@ class ProductList
     {
         return [
             'info' => 'PaginationInfo',
-            'data' => 'array[Product]',
+            'data' => 'array[Webhook]',
         ];
     }
 }

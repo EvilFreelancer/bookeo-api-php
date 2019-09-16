@@ -2,6 +2,12 @@
 
 namespace Bookeo\Models;
 
+/**
+ * Class MatchingSlot
+ *
+ * @codeCoverageIgnore
+ * @package Bookeo\Models
+ */
 class MatchingSlot
 {
     /**

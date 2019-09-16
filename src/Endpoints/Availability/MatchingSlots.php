@@ -24,11 +24,11 @@ class MatchingSlots extends Availability
      *
      * @return $this
      */
-    public function create(MatchingSlotsSearchParameters $search): self
+    public function search(MatchingSlotsSearchParameters $search): self
     {
         // Set HTTP params
         $this->type     = 'post';
-        $this->endpoint = $this->config->get('base_uri') . '/availability/matchingslots';
+        $this->endpoint = '/availability/matchingslots' . '?' . $this->getQuery();
         $this->params   = $search;
         $this->response = MatchingSlotList::class;
 
@@ -45,11 +45,11 @@ class MatchingSlots extends Availability
      */
     public function __invoke(string $pageNavigationToken, int $pageNumber = 1)
     {
-        $query = http_build_query(['pageNumber' => $pageNumber]);
+        $this->appendToQuery('pageNumber', $pageNumber);
 
         // Set HTTP params
         $this->type     = 'get';
-        $this->endpoint = $this->config->get('base_uri') . '/availability/matchingslots/' . $pageNavigationToken . '?' . $query;
+        $this->endpoint = '/availability/matchingslots/' . $pageNavigationToken . '?' . $this->getQuery();
         $this->response = MatchingSlotList::class;
 
         return $this;

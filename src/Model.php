@@ -22,8 +22,9 @@ class Model
      * List of allowed fields
      *
      * @return array
+     * @codeCoverageIgnore
      */
-    public function allowed(): array
+    protected function allowed(): array
     {
         return [];
     }
@@ -46,7 +47,7 @@ class Model
      *
      * @return array
      */
-    public function required(): array
+    private function required(): array
     {
         return $this->required;
     }
@@ -74,7 +75,7 @@ class Model
      */
     public function __set(string $name, $value)
     {
-        if (!\in_array($name, $this->allowed(), true)) {
+        if (!array_key_exists($name, $this->allowed())) {
             throw new InvalidArgumentException("Argument $name is not allowed [" . implode(',', $this->allowed()) . ']');
         }
 

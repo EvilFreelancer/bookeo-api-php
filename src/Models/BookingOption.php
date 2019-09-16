@@ -4,6 +4,12 @@ namespace Bookeo\Models;
 
 use Bookeo\Model;
 
+/**
+ * Class BookingOption
+ *
+ * @codeCoverageIgnore
+ * @package Bookeo\Models
+ */
 class BookingOption extends Model
 {
     /**

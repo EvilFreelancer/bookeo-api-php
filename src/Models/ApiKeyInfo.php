@@ -4,6 +4,12 @@ namespace Bookeo\Models;
 
 use Bookeo\Model;
 
+/**
+ * Class ApiKeyInfo
+ *
+ * @codeCoverageIgnore
+ * @package Bookeo\Models
+ */
 class ApiKeyInfo extends Model
 {
     /**

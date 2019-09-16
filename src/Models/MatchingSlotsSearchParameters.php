@@ -4,6 +4,12 @@ namespace Bookeo\Models;
 
 use Bookeo\Model;
 
+/**
+ * Class MatchingSlotsSearchParameters
+ *
+ * @codeCoverageIgnore
+ * @package Bookeo\Models
+ */
 class MatchingSlotsSearchParameters extends Model
 {
     /**

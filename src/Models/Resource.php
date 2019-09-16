@@ -4,6 +4,12 @@ namespace Bookeo\Models;
 
 use Bookeo\Model;
 
+/**
+ * Class Resource
+ *
+ * @codeCoverageIgnore
+ * @package Bookeo\Models
+ */
 class Resource extends Model
 {
     /**

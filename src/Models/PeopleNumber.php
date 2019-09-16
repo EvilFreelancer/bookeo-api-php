@@ -4,6 +4,12 @@ namespace Bookeo\Models;
 
 use Bookeo\Model;
 
+/**
+ * Class PeopleNumber
+ *
+ * @codeCoverageIgnore
+ * @package Bookeo\Models
+ */
 class PeopleNumber extends Model
 {
     /**

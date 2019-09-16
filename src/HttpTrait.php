@@ -1,12 +1,11 @@
 <?php
 
-namespace Bookeo\Helpers;
+namespace Bookeo;
 
 use GuzzleHttp\Exception\GuzzleException;
 use ErrorException;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
-use Bookeo\Config;
 
 /**
  * @author  Paul Rock <paul@drteam.rocks>
@@ -49,10 +48,10 @@ trait HttpTrait
 
             if ($params === null) {
                 // Execute the request to server
-                $result = $this->client->request($type, $url);
+                $result = $this->client->request($type, $this->config->get('base_uri') . $url);
             } else {
                 // Execute the request to server
-                $result = $this->client->request($type, $url, [RequestOptions::FORM_PARAMS => $params->toArray()]);
+                $result = $this->client->request($type, $this->config->get('base_uri') . $url, [RequestOptions::FORM_PARAMS => $params->toArray()]);
             }
 
             // Check the code status
@@ -82,7 +81,7 @@ trait HttpTrait
      *
      * @return null|object Array with data or NULL if error
      */
-    public function exec(): ?object
+    public function exec()
     {
         return $this->doRequest($this->type, $this->endpoint, $this->params);
     }
@@ -92,7 +91,7 @@ trait HttpTrait
      *
      * @return null|ResponseInterface RAW response or NULL if error
      */
-    public function raw()
+    public function raw(): ?ResponseInterface
     {
         return $this->doRequest($this->type, $this->endpoint, $this->params, true);
     }
@@ -123,11 +122,7 @@ trait HttpTrait
             // Return RAW result if required
             $response = $raw ? $result : json_decode($result->getBody(), false);
 
-        } catch (ErrorException $e) {
-            echo $e->getMessage() . "\n";
-            echo $e->getTrace();
-
-        } catch (GuzzleException $e) {
+        } catch (ErrorException | GuzzleException $e) {
             echo $e->getMessage() . "\n";
             echo $e->getTrace();
         }

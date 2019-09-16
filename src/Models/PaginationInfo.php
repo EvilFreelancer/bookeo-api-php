@@ -4,6 +4,12 @@ namespace Bookeo\Models;
 
 use Bookeo\Model;
 
+/**
+ * Class PaginationInfo
+ *
+ * @codeCoverageIgnore
+ * @package Bookeo\Models
+ */
 class PaginationInfo extends Model
 {
     /**

@@ -2,6 +2,8 @@
 
 namespace Bookeo;
 
+use ErrorException;
+
 class Config
 {
     /**
@@ -10,11 +12,13 @@ class Config
     public const ALLOWED = [
         'user_agent',
         'base_uri',
-        'secret_key'.
+        'secret_key',
         'api_key',
         'timeout',
         'tries',
-        'seconds'
+        'seconds',
+        'debug',
+        'track_redirects'
     ];
 
     /**
@@ -24,7 +28,7 @@ class Config
         'user_agent',
         'base_uri',
         'timeout',
-        'secret_key'.
+        'secret_key',
         'api_key',
     ];
 
@@ -47,16 +51,20 @@ class Config
         $this->_parameters = [
             // Errors must be disabled by default, because we need to get error codes
             // @link http://docs.guzzlephp.org/en/stable/request-options.html#http-errors
-            'http_errors' => false,
+            'http_errors'     => false,
 
             // Wrapper settings
-            'tries'       => 2,  // Count of tries
-            'seconds'     => 10, // Waiting time per each try
+            'tries'           => 2,  // Count of tries
+            'seconds'         => 10, // Waiting time per each try
+
+            // Optional parameters
+            'debug'           => false,
+            'track_redirects' => false,
 
             // Main parameters
-            'timeout'     => 20,
-            'user_agent'  => 'Bookeo PHP Client',
-            'base_uri'    => 'https://api.bookeo.com/v2'
+            'timeout'         => 20,
+            'user_agent'      => 'Bookeo PHP Client',
+            'base_uri'        => 'https://api.bookeo.com/v2'
         ];
 
         // Overwrite parameters by client input
@@ -66,14 +74,63 @@ class Config
     }
 
     /**
+     * Magic setter parameter by name
+     *
+     * @param string               $name  Name of parameter
+     * @param string|bool|int|null $value Value of parameter
+     *
+     * @throws \ErrorException
+     */
+    public function __set(string $name, $value)
+    {
+        $this->set($name, $value);
+    }
+
+    /**
+     * Check if parameter if available
+     *
+     * @param string $name Name of parameter
+     *
+     * @return bool
+     */
+    public function __isset($name): bool
+    {
+        return isset($this->_parameters[$name]);
+    }
+
+    /**
+     * Get parameter via magic call
+     *
+     * @param string $name Name of parameter
+     *
+     * @return bool|int|string|null
+     * @throws ErrorException
+     */
+    public function __get($name)
+    {
+        return $this->get($name);
+    }
+
+    /**
+     * Remove parameter from array
+     *
+     * @param string $name Name of parameter
+     */
+    public function __unset($name)
+    {
+        unset($this->_parameters[$name]);
+    }
+
+    /**
      * Set parameter by name
      *
      * @param string               $name  Name of parameter
      * @param string|bool|int|null $value Value of parameter
-     * @return \Bookeo\Config
-     * @throws \ErrorException
+     *
+     * @return $this
+     * @throws ErrorException
      */
-    public function set($name, $value): self
+    public function set(string $name, $value): self
     {
         if (!\in_array($name, self::ALLOWED, false)) {
             throw new \ErrorException("Parameter \"$name\" is not in available list [" . implode(',', self::ALLOWED) . ']');
@@ -87,12 +144,18 @@ class Config
     /**
      * Get available parameter by name
      *
-     * @param string $name
-     * @return string|bool|int|null
+     * @param string $name Name of parameter
+     *
+     * @return bool|int|string|null
+     * @throws ErrorException
      */
     public function get(string $name)
     {
-        return $this->_parameters[$name] ?? null;
+        if (!isset($this->_parameters[$name])) {
+            throw new \ErrorException("Parameter \"$name\" is not in set");
+        }
+
+        return $this->_parameters[$name];
     }
 
     /**
@@ -109,34 +172,18 @@ class Config
      * Return all ready for Guzzle parameters
      *
      * @return array
+     * @throws ErrorException
      */
     public function guzzle(): array
     {
         return [
             // 'base_uri'        => $this->get('base_uri'), // By some reasons base_uri option is not work anymore
             'timeout'         => $this->get('timeout'),
-            'track_redirects' => false,
-            'debug'           => true,
+            'track_redirects' => $this->get('track_redirects'),
+            'debug'           => $this->get('debug'),
             'headers'         => [
                 'User-Agent' => $this->get('user_agent'),
-                'X-API-KEY'  => $this->get('api_key'),
             ]
         ];
-    }
-
-
-    /**
-     * Validate preconfigured parameters
-     *
-     * @return bool
-     */
-    public function validate(): bool
-    {
-        foreach (self::REQUIRED as $item) {
-            if (false === array_key_exists($item, $this->_parameters)) {
-                return false;
-            }
-        }
-        return true;
     }
 }
