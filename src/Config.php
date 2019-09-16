@@ -12,6 +12,7 @@ class Config
     public const ALLOWED = [
         'user_agent',
         'base_uri',
+        'proxy',
         'secret_key',
         'api_key',
         'timeout',
