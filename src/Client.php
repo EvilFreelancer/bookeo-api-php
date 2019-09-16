@@ -3,6 +3,7 @@
 namespace Bookeo;
 
 use BadMethodCallException;
+use Bookeo\Endpoints\Webhooks;
 use ErrorException;
 use GuzzleHttp\Exception\ClientException;
 use Bookeo\Endpoints\Availability;
@@ -11,6 +12,9 @@ use Bookeo\Endpoints\Settings;
 /**
  * @property Availability $availability Availability of time slots
  * @property Settings     $settings     Settings of account
+ * @property Webhooks     $webhooks     Manage callback notifications
+ *
+ * @method Webhooks webhook(string $webhook_id)
  *
  * Single entry point for all classes
  *

@@ -58,8 +58,10 @@ trait HttpTrait
             $code   = $result->getStatusCode();
             $reason = $result->getReasonPhrase();
 
-            // If success response from server
-            if ($code === 200 || $code === 201) {
+            // 200 - success with non empty body
+            // 201 - success without body
+            // 204 - successfully deleted
+            if ($code === 200 || $code === 201 || $code === 204) {
                 return $result;
             }
 
