@@ -84,7 +84,7 @@ class Webhooks extends Client
     {
         // Set HTTP params
         $this->type     = 'delete';
-        $this->endpoint = '/webhooks/' . $this->webhook_id;
+        $this->endpoint = '/webhooks/' . $this->webhook_id . '?' . $this->getQuery();
 
         return $this;
     }

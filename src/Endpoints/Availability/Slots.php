@@ -33,15 +33,15 @@ class Slots extends Availability
             throw new \InvalidArgumentException('At least "startTime" or "pageNavigationToken" must be set');
         }
 
-        if (null !== $startTime) {
+        if (null !== $endTime) {
             $this->appendToQuery('endTime', $endTime);
         }
 
-        if (null !== $startTime) {
+        if (null !== $itemsPerPage) {
             $this->appendToQuery('itemsPerPage', $itemsPerPage);
         }
 
-        if (null !== $pageNavigationToken) {
+        if (null !== $pageNumber) {
             $this->appendToQuery('pageNumber', $pageNumber);
         }
 
