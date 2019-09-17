@@ -2,13 +2,15 @@
 
 namespace Bookeo\Models;
 
+use Bookeo\Model;
+
 /**
  * Class ProductList
  *
  * @codeCoverageIgnore
  * @package Bookeo\Models
  */
-class ProductList
+class ProductList extends Model
 {
     /**
      * List of allowed fields

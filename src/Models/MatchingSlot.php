@@ -2,13 +2,15 @@
 
 namespace Bookeo\Models;
 
+use Bookeo\Model;
+
 /**
  * Class MatchingSlot
  *
  * @codeCoverageIgnore
  * @package Bookeo\Models
  */
-class MatchingSlot
+class MatchingSlot extends Model
 {
     /**
      * List of allowed fields

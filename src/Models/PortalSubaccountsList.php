@@ -4,6 +4,12 @@ namespace Bookeo\Models;
 
 use Bookeo\Model;
 
+/**
+ * Class PortalSubaccountsList
+ *
+ * @codeCoverageIgnore
+ * @package Bookeo\Models
+ */
 class PortalSubaccountsList extends Model
 {
     /**
