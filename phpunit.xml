@@ -17,4 +17,8 @@
             <directory suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <env name="BOOKEO_SECRET_KEY" value="Ks7yQXbPwNSMoluRH0fT6c5cDQpe4kFX"/>
+        <env name="BOOKEO_API_KEY" value="AXHNMCXA33CKTT9H9963R425564NHLTW16D15F8386F"/>
+    </php>
 </phpunit>
