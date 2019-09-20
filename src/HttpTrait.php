@@ -3,6 +3,7 @@
 namespace Bookeo;
 
 use GuzzleHttp\Exception\GuzzleException;
+use Bookeo\Exceptions\EmptyResults;
 use ErrorException;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
@@ -81,7 +82,10 @@ trait HttpTrait
     /**
      * Execute request and return response
      *
-     * @return null|object Array with data or NULL if error
+     * @return object|null Array with data or NULL if error
+     * @throws EmptyResults
+     * @throws ErrorException
+     * @throws GuzzleException
      */
     public function exec()
     {
@@ -92,6 +96,9 @@ trait HttpTrait
      * Execute query and return RAW response from remote API
      *
      * @return null|ResponseInterface RAW response or NULL if error
+     * @throws EmptyResults
+     * @throws ErrorException
+     * @throws GuzzleException
      */
     public function raw(): ?ResponseInterface
     {
@@ -107,29 +114,23 @@ trait HttpTrait
      * @param bool   $raw      Return data in raw format
      *
      * @return null|object|ResponseInterface Array with data, RAW response or NULL if error
+     * @throws GuzzleException
+     * @throws ErrorException
+     * @throws EmptyResults
      */
     private function doRequest($type, $endpoint, $params = null, bool $raw = false)
     {
         // Null by default
         $response = null;
 
-        try {
-            // Execute the request to server
-            $result = $this->repeatRequest($type, $endpoint, $params);
+        // Execute the request to server
+        $result = $this->repeatRequest($type, $endpoint, $params);
 
-            if (null === $result) {
-                throw new ErrorException('Empty result');
-            }
-
-            // Return RAW result if required
-            $response = $raw ? $result : json_decode($result->getBody(), false);
-
-        } catch (ErrorException | GuzzleException $e) {
-            echo $e->getMessage() . "\n";
-            echo $e->getTrace();
+        if (null === $result) {
+            throw new EmptyResults('Empty results returned from Resova API');
         }
 
-        return $response;
+        // Return RAW result if required
+        return $raw ? $result : json_decode($result->getBody(), false);
     }
-
 }

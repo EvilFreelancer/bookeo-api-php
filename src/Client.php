@@ -145,17 +145,16 @@ class Client
         // By default return is empty
         $object = '';
 
-        // Set class name as namespace
-        $class = $this->namespace . '\\' . $this->snakeToPascal($name);
-
         try {
+
+            // Set class name as namespace
+            $class = $this->namespace . '\\' . $this->snakeToPascal($name);
 
             // Try to create object by name
             $object = new $class($this->config);
 
         } catch (ErrorException | ClientException $e) {
-            echo $e->getMessage() . "\n";
-            echo $e->getTrace();
+            echo $e->getMessage();
         }
 
         // If object is not created
@@ -189,8 +188,7 @@ class Client
             $object = new $class($this->config);
 
         } catch (ErrorException | ClientException $e) {
-            echo $e->getMessage() . "\n";
-            echo $e->getTrace();
+            echo $e->getMessage();
         }
 
         // If object is not created
