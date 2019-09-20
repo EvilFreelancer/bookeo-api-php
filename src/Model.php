@@ -47,7 +47,7 @@ class Model
      *
      * @return array
      */
-    private function required(): array
+    protected function required(): array
     {
         return $this->required;
     }
