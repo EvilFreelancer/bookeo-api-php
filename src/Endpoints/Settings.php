@@ -91,12 +91,34 @@ class Settings extends Client
      * - fixedCourse are fixed products that are defined as a course, i.e. comprise of a series of dates
      * - flexibleTime are products that describe private appointments, i.e. when one booking uses one resource (teacher, consultant, etc)
      *
-     * Although Bookeo applies a minimum amount of caching, it is recommended to cache these results for 10-15 minutes to improve the performance of your application, as product settings change rarely.
+     * Although Bookeo applies a minimum amount of caching, it is recommended to cache these results for 10-15 minutes to improve the performance of your application, as product
+     * settings change rarely.
+     *
+     * @param string      $type
+     * @param int         $itemsPerPage
+     * @param string|null $pageNavigationToken
+     * @param int         $pageNumber
      *
      * @return $this
      */
-    public function products(): self
+    public function products(string $type, int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1): self
     {
+        if (null !== $type) {
+            $this->appendToQuery('type', $type);
+        }
+
+        if (null !== $itemsPerPage) {
+            $this->appendToQuery('itemsPerPage', $itemsPerPage);
+        }
+
+        if (null !== $pageNavigationToken) {
+            $this->appendToQuery('pageNavigationToken', $pageNavigationToken);
+        }
+
+        if (null !== $pageNumber) {
+            $this->appendToQuery('pageNumber', $pageNumber);
+        }
+
         // Set HTTP params
         $this->type     = 'get';
         $this->endpoint = '/settings/products' . '?' . $this->getQuery();
@@ -107,10 +129,26 @@ class Settings extends Client
     /**
      * Retrieve all available resources
      *
+     * @param int         $itemsPerPage
+     * @param string|null $pageNavigationToken
+     * @param int         $pageNumber
+     *
      * @return $this
      */
-    public function resources(): self
+    public function resources(int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1): self
     {
+        if (null !== $itemsPerPage) {
+            $this->appendToQuery('itemsPerPage', $itemsPerPage);
+        }
+
+        if (null !== $pageNavigationToken) {
+            $this->appendToQuery('pageNavigationToken', $pageNavigationToken);
+        }
+
+        if (null !== $pageNumber) {
+            $this->appendToQuery('pageNumber', $pageNumber);
+        }
+
         // Set HTTP params
         $this->type     = 'get';
         $this->endpoint = '/settings/resources' . '?' . $this->getQuery();

@@ -74,7 +74,7 @@ class Subaccounts extends Client
         }
 
         if (null !== $pageNavigationToken) {
-            $this->appendToQuery('pageNumber', $pageNumber);
+            $this->appendToQuery('pageNavigationToken', $pageNavigationToken);
         }
 
         if (null !== $pageNumber) {
