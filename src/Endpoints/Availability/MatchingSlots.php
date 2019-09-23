@@ -20,12 +20,17 @@ class MatchingSlots extends Availability
      * available for those numbers, and an estimate of the price. Parameters include product code, number of people and options. The successful response also contains a "Location"
      * HTTP header, which can be invoked to navigate the results of the search.
      *
-     * @param MatchingSlotsSearchParameters $search
+     * @param \Bookeo\Models\MatchingSlotsSearchParameters $search
+     * @param int                                          $itemsPerPage maximum: 300
      *
      * @return $this
      */
-    public function search(MatchingSlotsSearchParameters $search): self
+    public function search(MatchingSlotsSearchParameters $search, int $itemsPerPage = 50): self
     {
+        if (!empty($itemsPerPage)) {
+            $this->appendToQuery('itemsPerPage', $itemsPerPage);
+        }
+
         // Set HTTP params
         $this->type     = 'post';
         $this->endpoint = '/availability/matchingslots' . '?' . $this->getQuery();
@@ -45,7 +50,9 @@ class MatchingSlots extends Availability
      */
     public function __invoke(string $pageNavigationToken, int $pageNumber = 1)
     {
-        $this->appendToQuery('pageNumber', $pageNumber);
+        if (!empty($pageNumber)) {
+            $this->appendToQuery('pageNumber', $pageNumber);
+        }
 
         // Set HTTP params
         $this->type     = 'get';
