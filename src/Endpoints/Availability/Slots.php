@@ -37,6 +37,8 @@ class Slots extends Availability
             $this->appendToQuery('startTime', $startTime);
         } elseif (empty($startTime) && !empty($pageNavigationToken)) {
             $this->appendToQuery('pageNavigationToken', $pageNavigationToken);
+        } elseif (!empty($startTime) && !empty($pageNavigationToken)) {
+            $this->appendToQuery('pageNavigationToken', $pageNavigationToken);
         } else {
             throw new \InvalidArgumentException('At least "startTime" or "pageNavigationToken" must be set');
         }
