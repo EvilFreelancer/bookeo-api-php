@@ -94,14 +94,14 @@ class Settings extends Client
      * Although Bookeo applies a minimum amount of caching, it is recommended to cache these results for 10-15 minutes to improve the performance of your application, as product
      * settings change rarely.
      *
-     * @param string      $type
+     * @param string|null $type
      * @param int         $itemsPerPage
      * @param string|null $pageNavigationToken
      * @param int         $pageNumber
      *
      * @return $this
      */
-    public function products(string $type, int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1): self
+    public function products(string $type = null, int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1): self
     {
         if (null !== $type) {
             $this->appendToQuery('type', $type);
