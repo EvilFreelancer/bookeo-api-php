@@ -103,19 +103,19 @@ class Settings extends Client
      */
     public function products(string $type = null, int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1): self
     {
-        if (null !== $type) {
+        if (!empty($type)) {
             $this->appendToQuery('type', $type);
         }
 
-        if (null !== $itemsPerPage) {
+        if (!empty($itemsPerPage)) {
             $this->appendToQuery('itemsPerPage', $itemsPerPage);
         }
 
-        if (null !== $pageNavigationToken) {
+        if (!empty($pageNavigationToken)) {
             $this->appendToQuery('pageNavigationToken', $pageNavigationToken);
         }
 
-        if (null !== $pageNumber) {
+        if (!empty($pageNumber)) {
             $this->appendToQuery('pageNumber', $pageNumber);
         }
 
@@ -137,15 +137,15 @@ class Settings extends Client
      */
     public function resources(int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1): self
     {
-        if (null !== $itemsPerPage) {
+        if (!empty($itemsPerPage)) {
             $this->appendToQuery('itemsPerPage', $itemsPerPage);
         }
 
-        if (null !== $pageNavigationToken) {
+        if (!empty($pageNavigationToken)) {
             $this->appendToQuery('pageNavigationToken', $pageNavigationToken);
         }
 
-        if (null !== $pageNumber) {
+        if (!empty($pageNumber)) {
             $this->appendToQuery('pageNumber', $pageNumber);
         }
 

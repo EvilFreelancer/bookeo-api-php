@@ -109,8 +109,9 @@ class Customers extends Client
 
     /**
      * The customer's email address is the "username" used by Bookeo to authenticate customers.
-     * So to authenticate a customer your application would typically use GET /customers to search for customers with a given email address, and then GET /customers/{id}/authenticate to authenticate.
-     * Remember that there may be duplicate customer records with the same email address, ex. due to duplicate importing or manual record creation.
+     * So to authenticate a customer your application would typically use GET /customers to search for customers with a given email address, and then GET
+     * /customers/{id}/authenticate to authenticate. Remember that there may be duplicate customer records with the same email address, ex. due to duplicate importing or manual
+     * record creation.
      *
      * @param string $password
      *
@@ -134,31 +135,38 @@ class Customers extends Client
      * @param int         $itemsPerPage       maximum: 100
      * @param string|null $pageNavigationToken
      * @param int         $pageNumber
+     *
      * @return Customers
      */
-    public function bookings(string $beginDate = null, string $endDate = null, bool $expandParticipants = false, int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1): self
-    {
-        if (null !== $beginDate) {
+    public function bookings(
+        string $beginDate = null,
+        string $endDate = null,
+        bool $expandParticipants = false,
+        int $itemsPerPage = 50,
+        string $pageNavigationToken = null,
+        int $pageNumber = 1
+    ): self {
+        if (!empty($beginDate)) {
             $this->appendToQuery('beginDate', $beginDate);
         }
 
-        if (null !== $endDate) {
+        if (!empty($endDate)) {
             $this->appendToQuery('endDate', $endDate);
         }
 
-        if (null !== $expandParticipants) {
+        if (!empty($expandParticipants)) {
             $this->appendToQuery('expandParticipants', $expandParticipants);
         }
 
-        if (null !== $itemsPerPage) {
+        if (!empty($itemsPerPage)) {
             $this->appendToQuery('itemsPerPage', $itemsPerPage);
         }
 
-        if (null !== $pageNavigationToken) {
+        if (!empty($pageNavigationToken)) {
             $this->appendToQuery('pageNavigationToken', $pageNavigationToken);
         }
 
-        if (null !== $pageNumber) {
+        if (!empty($pageNumber)) {
             $this->appendToQuery('pageNumber', $pageNumber);
         }
 
@@ -176,19 +184,20 @@ class Customers extends Client
      * @param int         $itemsPerPage maximum: 100
      * @param string|null $pageNavigationToken
      * @param int         $pageNumber
+     *
      * @return Customers
      */
     public function linkedpeople(int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1): self
     {
-        if (null !== $itemsPerPage) {
+        if (!empty($itemsPerPage)) {
             $this->appendToQuery('itemsPerPage', $itemsPerPage);
         }
 
-        if (null !== $pageNavigationToken) {
+        if (!empty($pageNavigationToken)) {
             $this->appendToQuery('pageNavigationToken', $pageNavigationToken);
         }
 
-        if (null !== $pageNumber) {
+        if (!empty($pageNumber)) {
             $this->appendToQuery('pageNumber', $pageNumber);
         }
 

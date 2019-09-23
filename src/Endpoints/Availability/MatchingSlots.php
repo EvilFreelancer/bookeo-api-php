@@ -16,9 +16,9 @@ class MatchingSlots extends Availability
     /**
      * Create a search for available slots that match the given search parameters.
      * Note that there are two different searches possible, /availability/slots and /availability/matchingslots (this endpoint).
-     * The former simply shows the number of available seats for each available slot. The latter (this one) takes as input the participant numbers, and shows the slots that are available for those numbers, and an estimate of the price.
-     * Parameters include product code, number of people and options.
-     * The successful response also contains a "Location" HTTP header, which can be invoked to navigate the results of the search.
+     * The former simply shows the number of available seats for each available slot. The latter (this one) takes as input the participant numbers, and shows the slots that are
+     * available for those numbers, and an estimate of the price. Parameters include product code, number of people and options. The successful response also contains a "Location"
+     * HTTP header, which can be invoked to navigate the results of the search.
      *
      * @param MatchingSlotsSearchParameters $search
      *

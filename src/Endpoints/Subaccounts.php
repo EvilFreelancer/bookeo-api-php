@@ -69,15 +69,15 @@ class Subaccounts extends Client
      */
     public function all(int $itemsPerPage = 100, string $pageNavigationToken = null, int $pageNumber = 1): self
     {
-        if (null !== $itemsPerPage) {
+        if (!empty($itemsPerPage)) {
             $this->appendToQuery('itemsPerPage', $itemsPerPage);
         }
 
-        if (null !== $pageNavigationToken) {
+        if (!empty($pageNavigationToken)) {
             $this->appendToQuery('pageNavigationToken', $pageNavigationToken);
         }
 
-        if (null !== $pageNumber) {
+        if (!empty($pageNumber)) {
             $this->appendToQuery('pageNumber', $pageNumber);
         }
 
