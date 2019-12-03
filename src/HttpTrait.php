@@ -26,9 +26,9 @@ trait HttpTrait
     /**
      * Object of main config
      *
-     * @var Config
+     * @var \Bookeo\Config
      */
-    protected $config;
+    public $config;
 
     /**
      * Request executor with timeout and repeat tries
