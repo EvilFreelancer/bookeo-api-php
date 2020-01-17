@@ -4,7 +4,7 @@ return [
     'api_key'         => '',
     'secret_key'      => '',
     'proxy'           => null,
-    'base_uri'        => 'https://api.bookeo.com/v2'
+    'base_uri'        => 'https://api.bookeo.com/v2',
     'user_agent'      => 'Bookeo PHP Client',
     'timeout'         => 20,
     'tries'           => 2,  // Count of tries
