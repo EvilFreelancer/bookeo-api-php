@@ -8,7 +8,11 @@
         "bookeo",
         "client",
         "rest-api",
-        "api-client"
+        "api-client",
+        "api",
+        "laravel",
+        "package",
+        "facade"
     ],
     "authors": [
         {
@@ -22,6 +26,11 @@
             "Bookeo\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Bookeo\\Tests\\": "./tests/"
+        }
+    },
     "require": {
         "php": ">=7.1",
         "ext-curl": "*",
@@ -29,6 +38,18 @@
         "guzzlehttp/guzzle": "^6.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.0"
+        "phpunit/phpunit": "^7.0",
+        "vlucas/phpdotenv": "^3.6",
+        "orchestra/testbench": "^3.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bookeo\\Laravel\\ClientServiceProvider"
+            ],
+            "aliases": {
+                "BookeoApi": "Bookeo\\Laravel\\ClientFacade"
+            }
+        }
     }
 }

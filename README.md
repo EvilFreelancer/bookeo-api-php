@@ -10,6 +10,56 @@
 
     composer require evilfreelancer/bookeo-api-php
 
+## Laravel framework support
+
+Resova API client is optimized for usage as normal Laravel package, all functional is available via `\ResovaApi` facade,
+for access to client object you need instead:
+
+```php
+$config = new \Bookeo\Config([
+    'api_key'    => 'my-api-key',
+    'secret_key' => 'my-secret-key'
+]);
+$resova = new \Bookeo\Client($config);
+```
+
+Use:
+
+```php
+$resova = \BookeoApi::getClient();
+```
+
+You also may provide additional parameters to your client by passing array of parameters to `getClient` method:
+
+```php
+$resova = \BookeoApi::getClient([
+    'api_key'    => 'my-api-key',
+    'secret_key' => 'my-secret-key'
+]);
+```
+
+### Laravel installation
+
+Install the package via Composer:
+
+    composer require evilfreelancer/resova-api-php
+
+By default the package will automatically register its service provider, but
+if you are a happy owner of Laravel version less than 5.3, then in a project, which is using your package
+(after composer require is done, of course), add into`providers` block of your `config/app.php`:
+
+```php
+'providers' => [
+    // ...
+    Bookeo\Laravel\ClientServiceProvider::class,
+],
+```
+
+Optionally, publish the configuration file if you want to change any defaults:
+
+    php artisan vendor:publish --provider="Bookeo\\Laravel\\ClientServiceProvider"
+
+
 ## How to use
 
 ```php
