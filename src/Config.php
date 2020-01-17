@@ -18,8 +18,10 @@ class Config
         'timeout',
         'tries',
         'seconds',
+        'verbose',
         'debug',
-        'track_redirects'
+        'track_redirects',
+        'allow_redirects'
     ];
 
     /**
@@ -61,6 +63,7 @@ class Config
             // Optional parameters
             'debug'           => false,
             'track_redirects' => false,
+            'allow_redirects' => true,
 
             // Main parameters
             'timeout'         => 20,
@@ -188,7 +191,7 @@ class Config
         ];
 
         // Proxy is optional
-        if (isset($this->proxy)) {
+        if (!empty($this->proxy)) {
             $options['proxy'] = $this->proxy;
         }
 
