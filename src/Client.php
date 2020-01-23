@@ -10,6 +10,7 @@ use ErrorException;
 use GuzzleHttp\Exception\ClientException;
 use Bookeo\Endpoints\Availability;
 use Bookeo\Endpoints\Settings;
+use Bookeo\Interfaces\QueryInterface;
 
 /**
  * @property Availability $availability Availability of time slots
@@ -26,7 +27,7 @@ use Bookeo\Endpoints\Settings;
  *
  * @package Bookeo
  */
-class Client
+class Client implements QueryInterface
 {
     use HttpTrait;
 
@@ -71,6 +72,7 @@ class Client
      * API constructor.
      *
      * @param array|Config $config
+     *
      * @throws ErrorException
      */
     public function __construct($config)
@@ -209,6 +211,7 @@ class Client
      * Check if class is exist in folder
      *
      * @param string $name
+     *
      * @return bool
      */
     public function __isset(string $name): bool
@@ -221,6 +224,7 @@ class Client
      *
      * @param string $name
      * @param mixed  $value
+     *
      * @throws BadMethodCallException
      */
     public function __set(string $name, $value)
