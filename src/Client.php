@@ -3,25 +3,22 @@
 namespace Bookeo;
 
 use BadMethodCallException;
-use Bookeo\Endpoints\Customers;
-use Bookeo\Endpoints\Payments;
-use Bookeo\Endpoints\Webhooks;
 use ErrorException;
 use GuzzleHttp\Exception\ClientException;
-use Bookeo\Endpoints\Availability;
-use Bookeo\Endpoints\Settings;
 use Bookeo\Interfaces\QueryInterface;
 
 /**
- * @property Availability $availability Availability of time slots
- * @property Settings     $settings     Settings of account
- * @property Webhooks     $webhooks     Manage callback notifications
- * @property Customers    $customers    Operations to manage customers
- * @property Payments     $payments     Operations to manage payments
+ * @property \Bookeo\Endpoints\Availability $availability Availability of time slots
+ * @property \Bookeo\Endpoints\Settings     $settings     Settings of account
+ * @property \Bookeo\Endpoints\Webhooks     $webhooks     Manage callback notifications
+ * @property \Bookeo\Endpoints\Customers    $customers    Operations to manage customers
+ * @property \Bookeo\Endpoints\Payments     $payments     Operations to manage payments
+ * @property \Bookeo\Endpoints\Holds        $holds        Operations to create temporary holds before finalizing bookings
  *
- * @method Webhooks  webhook(string $webhook_id)
- * @method Payments  payment(string $payment_id)
- * @method Customers customer(string $customer_id)
+ * @method \Bookeo\Endpoints\Webhooks  webhook(string $webhook_id)
+ * @method \Bookeo\Endpoints\Payments  payment(string $payment_id)
+ * @method \Bookeo\Endpoints\Customers customer(string $customer_id)
+ * @method \Bookeo\Endpoints\Holds     hold(string $hold_id)
  *
  * Single entry point for all classes
  *
