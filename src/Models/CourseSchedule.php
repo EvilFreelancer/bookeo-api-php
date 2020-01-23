@@ -5,12 +5,12 @@ namespace Bookeo\Models;
 use Bookeo\Model;
 
 /**
- * Class SlotList
+ * Class MatchingSlot
  *
  * @codeCoverageIgnore
  * @package Bookeo\Models
  */
-class SlotList extends Model
+class CourseSchedule extends Model
 {
     /**
      * List of allowed fields
@@ -20,8 +20,7 @@ class SlotList extends Model
     public function allowed(): array
     {
         return [
-            'info' => PaginationInfo::class,
-            'data' => 'array[Slot]',
+            //
         ];
     }
 }

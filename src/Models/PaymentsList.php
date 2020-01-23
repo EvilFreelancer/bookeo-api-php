@@ -4,6 +4,12 @@ namespace Bookeo\Models;
 
 use Bookeo\Model;
 
+/**
+ * Class PaymentsList
+ *
+ * @codeCoverageIgnore
+ * @package Bookeo\Models
+ */
 class PaymentsList extends Model
 {
     /**
@@ -14,7 +20,7 @@ class PaymentsList extends Model
     public function allowed(): array
     {
         return [
-            'info' => 'PaginationInfo',
+            'info' => PaginationInfo::class,
             'data' => 'array[Payment]',
         ];
     }

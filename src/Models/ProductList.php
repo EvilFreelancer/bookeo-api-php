@@ -20,8 +20,8 @@ class ProductList extends Model
     public function allowed(): array
     {
         return [
-            'info' => 'PaginationInfo',
-            'data' => 'array[Product]',
+            'info' => PaginationInfo::class, // [read-only]
+            'data' => 'array[Product]',      // [read-only]
         ];
     }
 }

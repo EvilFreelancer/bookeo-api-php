@@ -20,7 +20,7 @@ class BookingsList extends Model
     public function allowed(): array
     {
         return [
-            'info' => 'PaginationInfo',
+            'info' => PaginationInfo::class,
             'data' => 'array[Booking]',
         ];
     }
