@@ -3,6 +3,15 @@
 namespace Bookeo\Endpoints;
 
 use Bookeo\Client;
+use Bookeo\Interfaces\QueryInterface;
+use Bookeo\Models\ApiKeyInfo;
+use Bookeo\Models\Business;
+use Bookeo\Models\CustomFieldDefinitions;
+use Bookeo\Models\LanguagesList;
+use Bookeo\Models\PeopleCategoryList;
+use Bookeo\Models\ProductList;
+use Bookeo\Models\ResourceTypesList;
+use Bookeo\Models\TaxesList;
 
 /**
  * Access account settings
@@ -14,13 +23,14 @@ class Settings extends Client
     /**
      * Get information about your own API Key
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function apikeyinfo(): self
+    public function apikeyinfo(): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'get';
         $this->endpoint = '/settings/apikeyinfo' . '?' . $this->getQuery();
+        $this->response = ApiKeyInfo::class;
 
         return $this;
     }
@@ -28,13 +38,14 @@ class Settings extends Client
     /**
      * Get information, location and contact details about the business
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function business(): self
+    public function business(): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'get';
         $this->endpoint = '/settings/business' . '?' . $this->getQuery();
+        $this->response = Business::class;
 
         return $this;
     }
@@ -42,13 +53,14 @@ class Settings extends Client
     /**
      * Retrieve custom fields about customers and participants
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function customercustomfields(): self
+    public function customercustomfields(): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'get';
         $this->endpoint = '/settings/customercustomfields' . '?' . $this->getQuery();
+        $this->response = CustomFieldDefinitions::class;
 
         return $this;
     }
@@ -56,13 +68,14 @@ class Settings extends Client
     /**
      * Retrieve all supported languages
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function languages(): self
+    public function languages(): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'get';
         $this->endpoint = '/settings/languages' . '?' . $this->getQuery();
+        $this->response = LanguagesList::class;
 
         return $this;
     }
@@ -73,13 +86,14 @@ class Settings extends Client
      * Retrieve the people categories supported by this account.
      * This can include the default ones ("Adults","Children","Infants") and also custom ones defined by the account ("Students", ...)
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function peoplecategories(): self
+    public function peoplecategories(): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'get';
         $this->endpoint = '/settings/peoplecategories' . '?' . $this->getQuery();
+        $this->response = PeopleCategoryList::class;
 
         return $this;
     }
@@ -99,9 +113,9 @@ class Settings extends Client
      * @param string|null $pageNavigationToken
      * @param int         $pageNumber
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function products(string $type = null, int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1): self
+    public function products(string $type = null, int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1): QueryInterface
     {
         if (!empty($type)) {
             $this->appendToQuery('type', $type);
@@ -122,6 +136,7 @@ class Settings extends Client
         // Set HTTP params
         $this->type     = 'get';
         $this->endpoint = '/settings/products' . '?' . $this->getQuery();
+        $this->response = ProductList::class;
 
         return $this;
     }
@@ -133,9 +148,9 @@ class Settings extends Client
      * @param string|null $pageNavigationToken
      * @param int         $pageNumber
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function resources(int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1): self
+    public function resources(int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1): QueryInterface
     {
         if (!empty($itemsPerPage)) {
             $this->appendToQuery('itemsPerPage', $itemsPerPage);
@@ -152,6 +167,7 @@ class Settings extends Client
         // Set HTTP params
         $this->type     = 'get';
         $this->endpoint = '/settings/resources' . '?' . $this->getQuery();
+        $this->response = ResourceTypesList::class;
 
         return $this;
     }
@@ -159,13 +175,14 @@ class Settings extends Client
     /**
      * Retrieve all taxes used by this business
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function taxes(): self
+    public function taxes(): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'get';
         $this->endpoint = '/settings/taxes' . '?' . $this->getQuery();
+        $this->response = TaxesList::class;
 
         return $this;
     }

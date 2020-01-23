@@ -3,6 +3,7 @@
 namespace Bookeo\Endpoints;
 
 use Bookeo\Client;
+use Bookeo\Interfaces\QueryInterface;
 use Bookeo\Models\Payment;
 use Bookeo\Models\PaymentsList;
 
@@ -16,9 +17,9 @@ class Payments extends Client
     /**
      * Get a list of payments received
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function all(): self
+    public function all(): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'get';

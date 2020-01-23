@@ -3,6 +3,7 @@
 namespace Bookeo\Endpoints;
 
 use Bookeo\Client;
+use Bookeo\Interfaces\QueryInterface;
 use Bookeo\Models\Webhook;
 use Bookeo\Models\WebhooksList;
 
@@ -18,9 +19,9 @@ class Webhooks extends Client
      *
      * Retrieve all the webhooks for this api key
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function all(): self
+    public function all(): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'get';
@@ -43,9 +44,9 @@ class Webhooks extends Client
      *
      * @param Webhook $webhook
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function create(Webhook $webhook): self
+    public function create(Webhook $webhook): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'post';
@@ -78,9 +79,9 @@ class Webhooks extends Client
     /**
      * Delete a webhook
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function delete(): self
+    public function delete(): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'delete';

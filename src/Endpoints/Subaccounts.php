@@ -3,6 +3,7 @@
 namespace Bookeo\Endpoints;
 
 use Bookeo\Client;
+use Bookeo\Interfaces\QueryInterface;
 use Bookeo\Models\PortalSubaccountsList;
 
 /**
@@ -26,9 +27,9 @@ class Subaccounts extends Client
      *
      * @param string $subaccountId
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function create(string $subaccountId): self
+    public function create(string $subaccountId): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'post';
@@ -45,9 +46,9 @@ class Subaccounts extends Client
      * @param string $subaccountId
      * @param string $apiKey
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function delete(string $subaccountId, string $apiKey): self
+    public function delete(string $subaccountId, string $apiKey): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'delete';
@@ -65,9 +66,9 @@ class Subaccounts extends Client
      * @param string|null $pageNavigationToken
      * @param int         $pageNumber
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function all(int $itemsPerPage = 100, string $pageNavigationToken = null, int $pageNumber = 1): self
+    public function all(int $itemsPerPage = 100, string $pageNavigationToken = null, int $pageNumber = 1): QueryInterface
     {
         if (!empty($itemsPerPage)) {
             $this->appendToQuery('itemsPerPage', $itemsPerPage);

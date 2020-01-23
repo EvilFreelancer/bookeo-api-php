@@ -3,6 +3,7 @@
 namespace Bookeo\Endpoints;
 
 use Bookeo\Client;
+use Bookeo\Interfaces\QueryInterface;
 use Bookeo\Models\BookingsList;
 use Bookeo\Models\Customer;
 use Bookeo\Models\CustomersList;
@@ -20,9 +21,9 @@ class Customers extends Client
      *
      * Get a list of customers.
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function all(): self
+    public function all(): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'get';
@@ -39,9 +40,9 @@ class Customers extends Client
      *
      * @param Customer $customer
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function create(Customer $customer): self
+    public function create(Customer $customer): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'post';
@@ -78,9 +79,9 @@ class Customers extends Client
      *
      * @param Customer $customer
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function update(Customer $customer): self
+    public function update(Customer $customer): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'put';
@@ -96,9 +97,9 @@ class Customers extends Client
      * Please note it is not possible to delete customers that have bookings in the future, and that are not cancelled.
      * If your application needs to delete a customer with future bookings, make sure to cancel all future bookings for that customer first.
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function delete(): self
+    public function delete(): QueryInterface
     {
         // Set HTTP params
         $this->type     = 'delete';
@@ -115,9 +116,9 @@ class Customers extends Client
      *
      * @param string $password
      *
-     * @return $this
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function authenticate(string $password): self
+    public function authenticate(string $password): QueryInterface
     {
         $this->appendToQuery('password', $password);
 
@@ -136,7 +137,7 @@ class Customers extends Client
      * @param string|null $pageNavigationToken
      * @param int         $pageNumber
      *
-     * @return Customers
+     * @return \Bookeo\Interfaces\QueryInterface
      */
     public function bookings(
         string $beginDate = null,
@@ -145,7 +146,7 @@ class Customers extends Client
         int $itemsPerPage = 50,
         string $pageNavigationToken = null,
         int $pageNumber = 1
-    ): self {
+    ): QueryInterface {
         if (!empty($beginDate)) {
             $this->appendToQuery('beginDate', $beginDate);
         }
@@ -185,9 +186,9 @@ class Customers extends Client
      * @param string|null $pageNavigationToken
      * @param int         $pageNumber
      *
-     * @return Customers
+     * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function linkedpeople(int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1): self
+    public function linkedpeople(int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1): QueryInterface
     {
         if (!empty($itemsPerPage)) {
             $this->appendToQuery('itemsPerPage', $itemsPerPage);
