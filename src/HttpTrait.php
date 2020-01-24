@@ -80,12 +80,12 @@ trait HttpTrait
     }
 
     /**
-     * Execute request and return response
+     * Execute request and return parsed response from remote API
      *
      * @return object|null Array with data or NULL if error
-     * @throws EmptyResults
-     * @throws ErrorException
-     * @throws GuzzleException
+     * @throws \Bookeo\Exceptions\EmptyResults
+     * @throws \ErrorException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function exec()
     {
@@ -96,9 +96,9 @@ trait HttpTrait
      * Execute query and return RAW response from remote API
      *
      * @return null|ResponseInterface RAW response or NULL if error
-     * @throws EmptyResults
-     * @throws ErrorException
-     * @throws GuzzleException
+     * @throws \Bookeo\Exceptions\EmptyResults
+     * @throws \ErrorException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function raw(): ?ResponseInterface
     {

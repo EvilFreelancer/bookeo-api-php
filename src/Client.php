@@ -14,11 +14,13 @@ use Bookeo\Interfaces\QueryInterface;
  * @property \Bookeo\Endpoints\Customers    $customers    Operations to manage customers
  * @property \Bookeo\Endpoints\Payments     $payments     Operations to manage payments
  * @property \Bookeo\Endpoints\Holds        $holds        Operations to create temporary holds before finalizing bookings
+ * @property \Bookeo\Endpoints\Bookings     $bookings     Operations to manage bookings
  *
  * @method \Bookeo\Endpoints\Webhooks  webhook(string $webhook_id)
  * @method \Bookeo\Endpoints\Payments  payment(string $payment_id)
  * @method \Bookeo\Endpoints\Customers customer(string $customer_id)
  * @method \Bookeo\Endpoints\Holds     hold(string $hold_id)
+ * @method \Bookeo\Endpoints\Bookings  booking(string $booking_id)
  *
  * Single entry point for all classes
  *
@@ -58,7 +60,6 @@ class Client implements QueryInterface
      * @var array
      */
     protected static $variables = [];
-
 
     /**
      * @var array
