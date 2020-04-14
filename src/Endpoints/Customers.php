@@ -21,10 +21,60 @@ class Customers extends Client
      *
      * Get a list of customers.
      *
+     * @param string|null $searchText
+     * @param string|null $searchField
+     * @param string|null $createdSince date-time
+     * @param bool|null   $currentMembers
+     * @param bool|null   $currentNonMembers
+     * @param int         $itemsPerPage maximum: 100
+     * @param string|null $pageNavigationToken
+     * @param int         $pageNumber
+     *
      * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function all(): QueryInterface
-    {
+    public function all(
+        string $searchText = null,
+        string $searchField = null,
+        string $createdSince = null,
+        bool $currentMembers = true,
+        bool $currentNonMembers = true,
+        int $itemsPerPage = 50,
+        string $pageNavigationToken = null,
+        int $pageNumber = 1
+    ): QueryInterface {
+
+        if (!empty($searchText)) {
+            $this->appendToQuery('searchText', $searchText);
+        }
+
+        if (!empty($searchField)) {
+            $this->appendToQuery('searchField', $searchField);
+        }
+
+        if (!empty($createdSince)) {
+            $this->appendToQuery('createdSince', $createdSince);
+        }
+
+        if ($currentMembers !== null) {
+            $this->appendToQuery('currentMembers', $currentMembers);
+        }
+
+        if ($currentNonMembers !== null) {
+            $this->appendToQuery('currentNonMembers', $currentNonMembers);
+        }
+
+        if (!empty($itemsPerPage)) {
+            $this->appendToQuery('itemsPerPage', $itemsPerPage);
+        }
+
+        if (!empty($pageNavigationToken)) {
+            $this->appendToQuery('pageNavigationToken', $pageNavigationToken);
+        }
+
+        if (!empty($pageNumber)) {
+            $this->appendToQuery('pageNumber', $pageNumber);
+        }
+
         // Set HTTP params
         $this->type     = 'get';
         $this->endpoint = '/customers' . '?' . $this->getQuery();
@@ -147,6 +197,7 @@ class Customers extends Client
         string $pageNavigationToken = null,
         int $pageNumber = 1
     ): QueryInterface {
+
         if (!empty($beginDate)) {
             $this->appendToQuery('beginDate', $beginDate);
         }
@@ -188,8 +239,12 @@ class Customers extends Client
      *
      * @return \Bookeo\Interfaces\QueryInterface
      */
-    public function linkedpeople(int $itemsPerPage = 50, string $pageNavigationToken = null, int $pageNumber = 1): QueryInterface
-    {
+    public function linkedpeople(
+        int $itemsPerPage = 50,
+        string $pageNavigationToken = null,
+        int $pageNumber = 1
+    ): QueryInterface {
+
         if (!empty($itemsPerPage)) {
             $this->appendToQuery('itemsPerPage', $itemsPerPage);
         }
