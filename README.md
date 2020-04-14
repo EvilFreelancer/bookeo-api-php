@@ -20,19 +20,19 @@ $config = new \Bookeo\Config([
     'api_key'    => 'my-api-key',
     'secret_key' => 'my-secret-key'
 ]);
-$resova = new \Bookeo\Client($config);
+$bookeo = new \Bookeo\Client($config);
 ```
 
 Use:
 
 ```php
-$resova = \BookeoApi::getClient();
+$bookeo = \BookeoApi::getClient();
 ```
 
 You also may provide additional parameters to your client by passing array of parameters to `getClient` method:
 
 ```php
-$resova = \BookeoApi::getClient([
+$bookeo = \BookeoApi::getClient([
     'api_key'    => 'my-api-key',
     'secret_key' => 'my-secret-key'
 ]);
@@ -68,21 +68,21 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use \Bookeo\Client;
 use \Bookeo\Models\MatchingSlotsSearchParameters;
 
-$resova = new Client([
+$bookeo = new Client([
     'secret_key' => 'xxxxxxx',
     'api_key'    => 'xxxxxxxxxxxxxxxx'
 ]);
 
-$result = $resova->availability->slots(null, '2019-09-16T00:00:00Z', '2019-09-18T23:59:59Z')->exec();
+$result = $bookeo->availability->slots(null, '2019-09-16T00:00:00Z', '2019-09-18T23:59:59Z')->exec();
 print_r($result);
 
 $search = new MatchingSlotsSearchParameters();
 $search->productId = 'unique-id-of-product';
 
-$result = (string) $resova->availability->matching_slots->search($search)->exec();
+$result = (string) $bookeo->availability->matching_slots->search($search)->exec();
 print_r($result);
 
-$result = (string) $resova->availability->matching_slots('pageNavigationToken', 1)->exec();
+$result = (string) $bookeo->availability->matching_slots('pageNavigationToken', 1)->exec();
 print_r($result);
 ````
 
