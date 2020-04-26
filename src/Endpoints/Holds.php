@@ -52,6 +52,7 @@ class Holds extends Client
         // Set HTTP params
         $this->type     = 'post';
         $this->endpoint = '/holds?' . $this->getQuery();
+        $this->params   = $create;
         $this->response = Hold::class;
 
         return $this;
