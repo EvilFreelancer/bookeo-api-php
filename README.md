@@ -12,7 +12,7 @@
 
 ## Laravel framework support
 
-Resova API client is optimized for usage as normal Laravel package, all functional is available via `\ResovaApi` facade,
+Bookeo API client is optimized for usage as normal Laravel package, all functional is available via `\BookeoApi` facade,
 for access to client object you need instead:
 
 ```php
@@ -42,7 +42,7 @@ $bookeo = \BookeoApi::getClient([
 
 Install the package via Composer:
 
-    composer require evilfreelancer/resova-api-php
+    composer require evilfreelancer/bookeo-api-php
 
 By default the package will automatically register its service provider, but
 if you are a happy owner of Laravel version less than 5.3, then in a project, which is using your package
